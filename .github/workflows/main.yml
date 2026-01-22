@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
       - name: Install build dependencies
-        run: brew install swig
+        run: brew install swig openssl
       - name: Build native code
         run: |
           make clean swig all
