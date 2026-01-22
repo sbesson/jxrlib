@@ -20,4 +20,6 @@ jobs:
         run: brew install swig openssl
       - name: Build native code
         run: |
+          export LDFLAGS="=-L/usr/local/opt/openssl/lib"
+          export CXXFLAGS="-I/usr/local/opt/openssl/include"
           make clean swig all
