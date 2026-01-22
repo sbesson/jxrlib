@@ -1,0 +1,23 @@
+---
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-macos-arm64:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - name: Install build dependencies
+        run: brew install swig
+      - name: Build native code
+        run: |
+          make clean swig all
