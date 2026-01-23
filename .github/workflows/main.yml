@@ -8,6 +8,9 @@ on:
 jobs:
   build-macos-arm64:
     runs-on: macos-latest
+    env:
+       LDFLAGS: -L/usr/local/opt/openssl@3/lib
+       CPPLAGS: -I/usr/local/opt/openssl@3/include
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,7 +22,4 @@ jobs:
       - name: Install build dependencies
         run: brew install swig openssl
       - name: Build native code
-        run: |
-          export LDFLAGS="=-L/usr/local/opt/openssl/lib"
-          export CPPLAGS="-I/usr/local/opt/openssl/include"
-          make clean swig all
+        run: make clean swig all
